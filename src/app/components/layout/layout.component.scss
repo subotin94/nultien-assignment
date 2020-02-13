@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  nb-layout {
+    // Overriding nb header's already declared justify content rule
+    // It is still wrapped inside :host pseudo selector and that makes this style encapsulated
+    ::ng-deep nb-layout-header {
+      nav {
+        justify-content: space-between;
+      }
+    }
+    nb-sidebar {
+      transition: all 0.5s;
+    }
+  }
+}
