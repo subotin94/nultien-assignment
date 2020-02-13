@@ -3,13 +3,13 @@
   <nb-layout-header fixed>
     <div></div>
     <div>
-      <a (click)="toggle()">
+      <a *ngIf="showSidebar && isSmallerScreen" (click)="toggle()">
         <nb-icon icon="menu-outline"></nb-icon>
       </a>
     </div>
   </nb-layout-header>
 
-  <nb-sidebar *ngIf="showSidebar">
+  <nb-sidebar *ngIf="showSidebar" [state]="sidebarState">
 
   </nb-sidebar>
 

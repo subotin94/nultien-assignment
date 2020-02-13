@@ -1,29 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { NbSidebarService } from '@nebular/theme';
-import { SubComponent } from '../../core/sub-component.interface';
-import { SubSink } from 'subsink';
 
-type SidebarMode = 'opened' | 'collapsed';
+type SidebarState = 'expanded' | 'collapsed';
 
 @Component({
   selector: 'layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements SubComponent {
-
-  readonly subs = new SubSink();
+export class LayoutComponent {
 
   @Input() showSidebar: boolean = false;
 
-  constructor(private readonly sidenavService: NbSidebarService) { }
+  constructor(private readonly sidebarService: NbSidebarService,
+              private readonly breakpointObserver: BreakpointObserver) { }
 
-  toggle(): void {
-    this.sidenavService.toggle();
+  get sidebarState(): SidebarState {
+    return this.isSmallerScreen ? 'collapsed' : 'expanded';
   }
 
-  ngOnDestroy(): void {
+  get isSmallerScreen(): boolean {
+    return this.breakpointObserver.isMatched('(max-width: 768px)');
+  }
 
+  toggle(): void {
+    this.sidebarService.toggle();
   }
 
 }
