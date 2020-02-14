@@ -1,7 +1,14 @@
 @import 'themes';
-
+@import './app/styles/variables';
 @import '~@nebular/theme/styles/globals';
 
 @include nb-install() {
   @include nb-theme-global();
 };
+
+.label {
+  color: color(gray-1);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+}

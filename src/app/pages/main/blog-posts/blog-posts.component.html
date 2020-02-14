@@ -1,10 +1,23 @@
 <div class="blog-posts-header">
-  <button (click)="openAddBlogWindow()" nbButton status="info">Add post</button>
+  <button (click)="openAddBlogWindow()" nbButton>Add post</button>
 </div>
 <div class="blog-posts-list">
 
 </div>
 
 <ng-template #addBlogForm>
-  
+  <form [formGroup]="blogPostForm" (ngSubmit)="createBlog()">
+    <div>
+      <label class="label" for="title">Title</label>
+      <input formControlName="title" nbInput type="text" name="title" placeholder="Title of the post" fullWidth>
+    </div>
+    <div class="text">
+      <label class="label" for="text">Text</label>
+      <textarea formControlName="text" nbInput name="text" rows="7" placeholder="Text of the post" fullWidth></textarea>
+    </div>
+    <div class="actions">
+      <button nbButton type="submit">Post</button>
+      <button nbButton type="reset" status="danger">Cancel</button>
+    </div>
+  </form>
 </ng-template>
