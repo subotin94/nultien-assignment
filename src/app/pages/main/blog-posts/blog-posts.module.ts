@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NbButtonModule, NbWindowModule } from '@nebular/theme';
 import { BlogPostsComponent } from './blog-posts.component';
 
 @NgModule({
@@ -7,7 +8,9 @@ import { BlogPostsComponent } from './blog-posts.component';
     BlogPostsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NbButtonModule,
+    NbWindowModule.forRoot()
   ],
   exports: [
     BlogPostsComponent
