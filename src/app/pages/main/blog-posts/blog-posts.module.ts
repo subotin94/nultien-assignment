@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { A11yModule } from '@angular/cdk/a11y';
-import { NbButtonModule, NbWindowModule, NbInputModule } from '@nebular/theme';
-import { BlogPostsComponent } from './blog-posts.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NbButtonModule, NbWindowModule, NbInputModule, NbToastrModule, NbSpinnerModule, NbCardModule } from '@nebular/theme';
+import { BlogPostsComponent } from './blog-posts.component';
+import { BlogPostCardModule } from '../../../components/blog-post-card/blog-post-card.module';
 
 @NgModule({
   declarations: [
@@ -12,9 +12,12 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    BlogPostCardModule,
     NbButtonModule,
+    NbCardModule,
     NbInputModule,
-    A11yModule,
+    NbSpinnerModule,
+    NbToastrModule.forRoot({hasIcon: true}),
     NbWindowModule.forRoot()
   ],
   exports: [

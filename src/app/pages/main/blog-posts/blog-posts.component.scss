@@ -1,12 +1,32 @@
+@import "../../../../themes.scss";
+
 :host {
   display: block;
   .blog-posts-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+    h4 {
+      margin: 0;
+    }
   }
-  .blog-posts-list {
-    
+  .blog-posts-body {
+    max-height: 70vh;
+    overflow: auto;
+    &.padding-right {
+      padding-right: 10px;
+    }
+    @include scroll();
+    .spinner-container {
+      height: 70vh;
+      border-radius: 4px;
+    }
+  }
+  @media (max-height: 768px) {
+    .blog-posts-body {
+      max-height: unset;
+      padding-right: 0;
+    }
   }
 }
 
@@ -14,6 +34,10 @@
   .title {
     outline: none;
   }
+}
+
+::ng-deep nb-card-body {
+  height: fit-content;
 }
 
 form {
@@ -29,7 +53,7 @@ form {
     }
     &.actions {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
     }
   }

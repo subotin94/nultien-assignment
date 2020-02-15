@@ -1,0 +1,17 @@
+<nb-card accent="info">
+  <nb-card-header>
+    <div class="title-wrapper">
+      <img src="https://ya-webdesign.com/transparent250_/male-avatar-png-8.png" alt="Avatar">
+      <div class="title">
+        <h5>{{blogPost.title}}</h5>
+      </div>
+    </div>
+    <div class="actions">
+      <button (click)="edit.next()" nbButton status="info" appearance="outline">Edit</button>
+      <button (click)="delete.next()" nbButton status="danger" appearance="outline">Delete</button>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    {{blogPost.text}}
+  </nb-card-body>
+</nb-card>

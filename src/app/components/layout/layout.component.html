@@ -1,7 +1,9 @@
-<nb-layout>
+<nb-layout [withScroll]="true">
 
   <nb-layout-header fixed>
-    <div></div>
+    <div>
+      <logo [height]="34"></logo>
+    </div>
     <div>
       <a *ngIf="showSidebar && isSmallerScreen" (click)="toggle()">
         <nb-icon icon="menu-outline"></nb-icon>
@@ -9,8 +11,18 @@
     </div>
   </nb-layout-header>
 
-  <nb-sidebar *ngIf="showSidebar" [state]="sidebarState" containerFixed="true">
-
+  <nb-sidebar *ngIf="showSidebar" [fixed]="isSmallerScreen" [state]="sidebarState" containerFixed="true">
+    <ul>
+      <li>
+        <a routerLink="/main/category/1/blog-posts">Category 1</a>
+      </li>
+      <li>
+        <a routerLink="/main/category/2/blog-posts">Category 2</a>
+      </li>
+      <li>
+        <a routerLink="/main/category/3/blog-posts">Category 3</a>
+      </li>
+    </ul>
   </nb-sidebar>
 
   <nb-layout-column>

@@ -1,12 +1,27 @@
-<div class="blog-posts-header">
-  <button (click)="openAddBlogWindow()" nbButton>Add post</button>
-</div>
-<div class="blog-posts-list">
+<nb-card>
+  <nb-card-body>
+    <div class="blog-posts-header">
+      <h4>Blog posts</h4>
+      <button (click)="openBlogWindow()" nbButton status="info">Add post</button>
+    </div>
+  </nb-card-body>
+</nb-card>
 
+<div #scrollable class="blog-posts-body" [class.padding-right]="hasScroll">
+  <ng-container>
+    <div class="spinner-container"
+      *ngIf="loadingBlogs"
+      [nbSpinner]="loadingBlogs"
+      nbSpinnerStatus="info"
+      nbSpinnerSize="giant">
+    </div>
+    <blog-post-card *ngFor="let blogPost of blogPosts" (edit)="openBlogWindow(blogPost)" [blogPost]="blogPost">
+    </blog-post-card>
+  </ng-container>
 </div>
 
 <ng-template #addBlogForm>
-  <form [formGroup]="blogPostForm" (ngSubmit)="createBlog()">
+  <form [formGroup]="blogPostForm" (ngSubmit)="saveBlog()">
     <div>
       <label class="label" for="title">Title</label>
       <input formControlName="title" nbInput type="text" name="title" placeholder="Title of the post" fullWidth>
@@ -16,8 +31,8 @@
       <textarea formControlName="text" nbInput name="text" rows="7" placeholder="Text of the post" fullWidth></textarea>
     </div>
     <div class="actions">
-      <button nbButton type="submit">Post</button>
-      <button nbButton type="reset" status="danger">Cancel</button>
+      <button [nbSpinner]="loading" nbSpinnerStatus="control" nbButton type="submit" status="info">Post</button>
+      <button (click)="windowRef.close()" type="reset" nbButton status="danger" appearance="outline">Cancel</button>
     </div>
   </form>
 </ng-template>
