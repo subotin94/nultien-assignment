@@ -4,6 +4,13 @@
       <img src="https://ya-webdesign.com/transparent250_/male-avatar-png-8.png" alt="Avatar">
       <div class="title">
         <h5>{{blogPost.title}}</h5>
+        <p>
+          Posted date:
+          {{blogPost.createdAt | date:'M.d.yyyy'}}
+          at
+          {{blogPost.createdAt | date:'HH:mm'}}
+          by Some person {{blogPost.id}}
+        </p>
       </div>
     </div>
     <div class="actions">

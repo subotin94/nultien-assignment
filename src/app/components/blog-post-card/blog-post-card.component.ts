@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { BlogPost } from '../../models/blog-post.model';
 
 @Component({
@@ -6,15 +6,8 @@ import { BlogPost } from '../../models/blog-post.model';
   templateUrl: './blog-post-card.component.html',
   styleUrls: ['./blog-post-card.component.scss']
 })
-export class BlogPostCardComponent implements OnInit {
-
+export class BlogPostCardComponent {
   @Input() blogPost: BlogPost;
   @Output() edit = new EventEmitter<void>();
   @Output() delete = new EventEmitter<void>();
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

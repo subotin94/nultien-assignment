@@ -9,12 +9,7 @@
         <li *ngIf="showSearch">
           <nb-search type="modal-move"></nb-search>
         </li>
-        <li>
-          <a routerLink="/main/blog-posts">Blog posts</a>
-        </li>
-        <li>
-          <a routerLink="/main/comments">Comments</a>
-        </li>
+        <ng-container *ngTemplateOutlet="links"></ng-container>
       </ul>
       <a *ngIf="isSmallerScreen" (click)="toggle()">
         <nb-icon icon="menu-outline"></nb-icon>
@@ -28,12 +23,7 @@
       <nb-search *ngIf="showSearch && isSmallerScreen" type="modal-move"></nb-search>
     </div>
     <ul *ngIf="isSmallerScreen">
-      <li>
-        <a routerLink="/main/blog-posts">Blog posts</a>
-      </li>
-      <li>
-        <a routerLink="/main/comments">Comments</a>
-      </li>
+      <ng-container *ngTemplateOutlet="links"></ng-container>
     </ul>
     <div *ngIf="showCategories" class="add-category">
       <h6>Blog categories</h6>
@@ -58,3 +48,18 @@
   </nb-layout-column>
 
 </nb-layout>
+
+<ng-template #links>
+  <li>
+    <a routerLink="/main/blog-posts">Blog posts</a>
+  </li>
+  <li>
+    <a routerLink="/main/comments">Comments</a>
+  </li>
+  <li>
+    <a routerLink="/landing/home">My profile</a>
+  </li>
+  <li>
+    <a routerLink="/landing/home">Logout</a>
+  </li>
+</ng-template>

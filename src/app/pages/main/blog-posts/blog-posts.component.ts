@@ -54,11 +54,13 @@ export class BlogPostsComponent implements SubComponent {
   }
 
   search(term: string): void {
+    this.loadingBlogs = true;
     this.subs.add(this.blogPostService.search(term).subscribe(res => {
       if (this.router.url.includes('category')) {
         this.location.go('/main/blog-posts');
       }
       this.blogPosts = res.resultData;
+      this.loadingBlogs = false;
     }));
   }
 

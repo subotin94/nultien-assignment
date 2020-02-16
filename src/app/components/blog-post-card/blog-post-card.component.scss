@@ -20,8 +20,14 @@
           border-radius: 50%;
         }
         .title {
+          margin-left: 10px;
           display: flex;
           align-self: flex-start;
+          justify-content: center;
+          flex-direction: column;
+          p {
+            margin: 0;
+          }
         }
       }
       .actions {
