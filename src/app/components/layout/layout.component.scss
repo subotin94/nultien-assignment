@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 :host {
   display: block;
   nb-layout {
@@ -6,7 +8,80 @@
     ::ng-deep nb-layout-header {
       nav {
         justify-content: space-between;
+        .links {
+          display: flex;
+          list-style: none;
+          li {
+            display: flex;
+            align-items: center;
+            &:not(:last-child) {
+              margin-right: 10px;
+            }
+            nb-search {
+              button[nbButton] {
+                color: color(info);
+                &:active, &:hover, &:focus {
+                  color: color(info);
+                }
+              }
+            }
+            a {
+              text-decoration: none;
+              color: color(info);
+            }
+          }
+        }
       }
+    }
+    nb-sidebar {
+      .title-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        ::ng-deep nb-search {
+          button[nbButton] {
+            color: color(info);
+            &:active, &:hover, &:focus {
+              color: color(info);
+            }
+          }
+        }
+      }
+      ul {
+        list-style: none;
+        padding-left: 20px;
+        li {
+          a {
+            text-decoration: none;
+            color: color(info);
+          }
+        }
+      }
+      h5 {
+        margin: 0;
+        &.margin {
+          margin-bottom: 10px;
+        }
+      }
+      .add-category {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h6 {
+          margin: 0;
+        }
+      }
+      input[nbInput] {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+::ng-deep nb-search-field {
+  .search {
+    button[nbButton] {
+      color: color(info) !important;
     }
   }
 }

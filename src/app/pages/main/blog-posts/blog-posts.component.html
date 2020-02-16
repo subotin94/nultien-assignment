@@ -1,3 +1,7 @@
+<nb-alert *ngIf="searchTerm" accent="info" (close)="loadBlogs(categoryId)" closable="true">
+  Search results for: {{searchTerm}}
+</nb-alert>
+
 <nb-card>
   <nb-card-body>
     <div class="blog-posts-header">

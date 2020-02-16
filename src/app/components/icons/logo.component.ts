@@ -30,7 +30,3 @@ export class LogoComponent {
   @Input() width: number = 56;
   @Input() height: number = 49;
 }
-
-export const LAYOUT_ICONS = [
-  LogoComponent
-];

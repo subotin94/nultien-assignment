@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  height: calc(100% - 76px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .bounceIn2 {
+    animation-delay: 0.8s;
+  }
+  .bounceIn3 {
+    animation-delay: 1.6s;
+  }
+}

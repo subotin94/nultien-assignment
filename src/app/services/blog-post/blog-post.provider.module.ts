@@ -1,16 +1,19 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BlogPostService } from './blog-post.service';
 
-/**
- * Using services in the providers list in two separate lazy loaded modules causes
- * two service instances which isnt good specially for services that emits streams
- * I suppose this can(should) be done better but so far i found this as a temporary workaround.
- */
 @NgModule({
+  imports: [HttpClientModule],
   providers: [BlogPostService]
 })
 export class BlogPostProviderModule {
   static forRoot(): ModuleWithProviders<BlogPostProviderModule> {
+    return {
+      ngModule: BlogPostProviderModule,
+      providers: [BlogPostService]
+    };
+  }
+  static forChild(): ModuleWithProviders<BlogPostProviderModule> {
     return {
       ngModule: BlogPostProviderModule,
       providers: [BlogPostService]

@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CategoryProviderModule } from './services/category/category.provider.module';
+import { SearchProviderModule } from './services/search/search.provider.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SearchProviderModule.forRoot(),
+    CategoryProviderModule.forRoot()
   ],
   bootstrap: [AppComponent]
 })

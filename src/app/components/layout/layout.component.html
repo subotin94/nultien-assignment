@@ -1,27 +1,55 @@
 <nb-layout [withScroll]="true">
 
   <nb-layout-header fixed>
-    <div>
+    <a routerLink="/landing/home">
       <logo [height]="34"></logo>
-    </div>
+    </a>
     <div>
-      <a *ngIf="showSidebar && isSmallerScreen" (click)="toggle()">
+      <ul *ngIf="!isSmallerScreen" class="links">
+        <!-- <li *ngIf="showSearch">
+          <nb-search type="modal-move"></nb-search>
+        </li> -->
+        <li>
+          <a routerLink="/main/blog-posts">Blog posts</a>
+        </li>
+        <li>
+          <a routerLink="/main/comments">Comments</a>
+        </li>
+      </ul>
+      <a *ngIf="isSmallerScreen" (click)="toggle()">
         <nb-icon icon="menu-outline"></nb-icon>
       </a>
     </div>
   </nb-layout-header>
 
-  <nb-sidebar *ngIf="showSidebar" [fixed]="isSmallerScreen" [state]="sidebarState" containerFixed="true">
-    <ul>
+  <nb-sidebar [fixed]="isSmallerScreen" [state]="sidebarState" containerFixed="true">
+    <div class="title-wrapper">
+      <h5>My blog</h5>
+      <!-- <nb-search *ngIf="showSearch && isSmallerScreen" type="modal-move"></nb-search> -->
+    </div>
+    <ul *ngIf="isSmallerScreen">
       <li>
-        <a routerLink="/main/category/1/blog-posts">Category 1</a>
+        <a routerLink="/main/blog-posts">Blog posts</a>
       </li>
       <li>
-        <a routerLink="/main/category/2/blog-posts">Category 2</a>
+        <a routerLink="/main/comments">Comments</a>
       </li>
-      <li>
-        <a routerLink="/main/category/3/blog-posts">Category 3</a>
-      </li>
+    </ul>
+    <div *ngIf="showCategories" class="add-category">
+      <h6>Blog categories</h6>
+      <button (click)="showAddCategory = !showAddCategory" nbButton status="info" size="tiny">
+        <nb-icon [icon]="showAddCategory ? 'close-outline' : 'plus'"></nb-icon>
+      </button>
+    </div>
+    <form [formGroup]="addCategoryForm" (ngSubmit)="createCategory()">
+      <input formControlName="name" nbInput fieldSize="tiny" placeholder="Name" status="info" fullWidth *ngIf="showAddCategory" type="text">
+    </form>
+    <ul *ngIf="showCategories">
+      <ng-container>
+        <li *ngFor="let category of categories">
+          <a [routerLink]="'/main/category/' + category.id + '/blog-posts'">{{category.name}}</a>
+        </li>
+      </ng-container>
     </ul>
   </nb-sidebar>
 

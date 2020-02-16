@@ -14,9 +14,18 @@ export class BlogPostService extends MainService {
     return super.post(this.apiUrl, blogPost);
   }
 
-  findAll(categoryId: string, search?: string): Observable<Response<BlogPost>> {
-    const params = new HttpParams({fromObject: {categoryId}});
-    return super.get(`${this.apiUrl}/GetPostByCategory`, { params });
+  search(term: string): Observable<Response<BlogPost>> {
+    const params = new HttpParams({fromObject: {term}});
+    return super.get(`${this.apiUrl}/Search`, { params });
+  }
+
+  findAll(categoryId?: string): Observable<Response<BlogPost>> {
+    if (!categoryId) {
+      return super.get(this.apiUrl);
+    } else {
+      const params = new HttpParams({fromObject: {categoryId}});
+      return super.get(`${this.apiUrl}/GetPostByCategory`, { params });
+    }
   }
 
   update(blogPost: BlogPost): Observable<BlogPost> {

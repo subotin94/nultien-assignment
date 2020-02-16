@@ -1,12 +1,14 @@
 import { Component, ViewChild, TemplateRef, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { NbWindowService, NbWindowRef, NbToastrService } from '@nebular/theme';
 import { SubSink } from 'subsink';
 import { SubComponent } from '../../../core/sub-component.interface';
 import { BlogPostService } from '../../../services/blog-post/blog-post.service';
 import { BlogPost } from '../../../models/blog-post.model';
-import { CdkScrollable } from '@angular/cdk/overlay';
+import { CategoryService } from '../../../services/category/category.service';
+import { SearchService } from '../../../services/search/search.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'blog-posts',
@@ -26,6 +28,7 @@ export class BlogPostsComponent implements SubComponent {
   blogPostForEdit: BlogPost;
   blogPosts: BlogPost[] = [];
   loading = false;
+  searchTerm: string;
   loadingBlogs = false;
 
   categoryId: string;
@@ -33,6 +36,10 @@ export class BlogPostsComponent implements SubComponent {
   constructor(private readonly blogPostService: BlogPostService,
               private readonly windowService: NbWindowService,
               private readonly route: ActivatedRoute,
+              private readonly searchService: SearchService,
+              private readonly router: Router,
+              private readonly location: Location,
+              private readonly categoryService: CategoryService,
               private readonly toastService: NbToastrService,
               private readonly formBuilder: FormBuilder) {
     this.blogPostForm = this.formBuilder.group({
@@ -42,7 +49,17 @@ export class BlogPostsComponent implements SubComponent {
   }
 
   ngOnInit(): void {
+    this.subscribeOnSearch();
     this.subscribeOnCategoryChange();
+  }
+
+  search(term: string): void {
+    this.subs.add(this.blogPostService.search(term).subscribe(res => {
+      if (this.router.url.includes('category')) {
+        this.location.go('/main/blog-posts');
+      }
+      this.blogPosts = res.resultData;
+    }));
   }
 
   get hasScroll(): boolean {
@@ -50,14 +67,22 @@ export class BlogPostsComponent implements SubComponent {
     return el.offsetHeight > el.clientHeight;
   }
 
-  private subscribeOnCategoryChange() {
+  private subscribeOnSearch(): void {
+    this.subs.add(this.searchService.onSearch.subscribe(search => {
+      this.searchTerm = search;
+      this.search(search);
+    }));
+  }
+
+  private subscribeOnCategoryChange(): void {
     this.route.parent.paramMap.subscribe(paramMap => {
       this.categoryId = paramMap['params'].id;
       this.loadBlogs(this.categoryId);
     });
   }
 
-  loadBlogs(categoryId: string): void {
+  loadBlogs(categoryId: string, search?: string): void {
+    this.searchTerm = null;
     this.loadingBlogs = true;
     this.subs.add(this.blogPostService.findAll(categoryId).subscribe(res => {
       this.loadingBlogs = false;
