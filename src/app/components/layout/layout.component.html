@@ -6,9 +6,9 @@
     </a>
     <div>
       <ul *ngIf="!isSmallerScreen" class="links">
-        <!-- <li *ngIf="showSearch">
+        <li *ngIf="showSearch">
           <nb-search type="modal-move"></nb-search>
-        </li> -->
+        </li>
         <li>
           <a routerLink="/main/blog-posts">Blog posts</a>
         </li>
@@ -25,7 +25,7 @@
   <nb-sidebar [fixed]="isSmallerScreen" [state]="sidebarState" containerFixed="true">
     <div class="title-wrapper">
       <h5>My blog</h5>
-      <!-- <nb-search *ngIf="showSearch && isSmallerScreen" type="modal-move"></nb-search> -->
+      <nb-search *ngIf="showSearch && isSmallerScreen" type="modal-move"></nb-search>
     </div>
     <ul *ngIf="isSmallerScreen">
       <li>
