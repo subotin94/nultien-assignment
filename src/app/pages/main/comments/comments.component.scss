@@ -1,0 +1,60 @@
+@import "../../../../themes.scss";
+
+:host {
+  display: block;
+  .comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h4 {
+      margin: 0;
+    }
+  }
+  .comments-body {
+    max-height: 70vh;
+    overflow: auto;
+    &.padding-right {
+      padding-right: 10px;
+    }
+    @include scroll();
+    .spinner-container {
+      height: 70vh;
+      border-radius: 4px;
+    }
+  }
+  @media (max-height: 768px) {
+    .comments-body {
+      max-height: unset;
+      padding-right: 0;
+    }
+  }
+}
+
+::ng-deep nb-card-header {
+  .title {
+    outline: none;
+  }
+}
+
+::ng-deep nb-card-body {
+  height: fit-content;
+}
+
+form {
+  div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    &.text {
+      align-items: flex-start;
+    }
+    label {
+      margin-right: 10px;
+    }
+    &.actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}

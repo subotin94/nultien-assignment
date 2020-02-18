@@ -1,4 +1,5 @@
-import { Component, ViewChild, TemplateRef, ElementRef } from '@angular/core';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { NbWindowService, NbWindowRef, NbToastrService } from '@nebular/theme';
@@ -6,9 +7,7 @@ import { SubSink } from 'subsink';
 import { SubComponent } from '../../../core/sub-component.interface';
 import { BlogPostService } from '../../../services/blog-post/blog-post.service';
 import { BlogPost } from '../../../models/blog-post.model';
-import { CategoryService } from '../../../services/category/category.service';
 import { SearchService } from '../../../services/search/search.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'blog-posts',
@@ -21,8 +20,6 @@ export class BlogPostsComponent implements SubComponent {
 
   @ViewChild('addBlogForm', { static: true })
   addBlogFormRef: TemplateRef<HTMLFormElement>;
-  @ViewChild('scrollable', { static: true })
-  scrollableContainerRef: ElementRef<HTMLDivElement>;
   windowRef: NbWindowRef;
   blogPostForm: FormGroup;
   blogPostForEdit: BlogPost;
@@ -30,7 +27,6 @@ export class BlogPostsComponent implements SubComponent {
   loading = false;
   searchTerm: string;
   loadingBlogs = false;
-
   categoryId: string;
 
   constructor(private readonly blogPostService: BlogPostService,
@@ -39,7 +35,6 @@ export class BlogPostsComponent implements SubComponent {
               private readonly searchService: SearchService,
               private readonly router: Router,
               private readonly location: Location,
-              private readonly categoryService: CategoryService,
               private readonly toastService: NbToastrService,
               private readonly formBuilder: FormBuilder) {
     this.blogPostForm = this.formBuilder.group({
@@ -64,9 +59,8 @@ export class BlogPostsComponent implements SubComponent {
     }));
   }
 
-  get hasScroll(): boolean {
-    const el = this.scrollableContainerRef.nativeElement;
-    return el.offsetHeight > el.clientHeight;
+  delete(id: number): void {
+    this.subs.add(this.blogPostService.deleteBlogPost(id).subscribe(() => this.loadBlogs(this.categoryId)));
   }
 
   private subscribeOnSearch(): void {
@@ -83,7 +77,7 @@ export class BlogPostsComponent implements SubComponent {
     });
   }
 
-  loadBlogs(categoryId: string, search?: string): void {
+  loadBlogs(categoryId: string): void {
     this.searchTerm = null;
     this.loadingBlogs = true;
     this.subs.add(this.blogPostService.findAll(categoryId).subscribe(res => {

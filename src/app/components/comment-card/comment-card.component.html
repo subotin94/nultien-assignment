@@ -1,0 +1,20 @@
+<nb-card accent="info">
+  <nb-card-header>
+    <div class="title">
+      <h5>{{comment.title}}</h5>
+      <p>
+        Posted date:
+        {{comment.createdAt | date:'M.d.yyyy'}}
+        at
+        {{comment.createdAt | date:'HH:mm'}}
+      </p>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    {{comment.text}}
+    <div class="actions">
+      <button (click)="edit.next()" nbButton status="info" appearance="outline">Edit</button>
+      <button (click)="delete.next()" nbButton status="danger" appearance="outline">Delete</button>
+    </div>
+  </nb-card-body>
+</nb-card>

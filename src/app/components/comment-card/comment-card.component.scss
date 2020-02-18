@@ -1,0 +1,32 @@
+@import "../../styles/variables.scss";
+
+:host {
+  display: block;
+  &:not(:first-child) {
+    margin-top: 36px;
+  }
+  nb-card {
+    nb-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .title {
+        p {
+          margin: 0;
+          color: color(gray-1);
+        }
+      }
+    }
+    nb-card-body {
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        button[nbButton] {
+          margin: 5px;
+        }
+      }
+    }
+  }
+
+}

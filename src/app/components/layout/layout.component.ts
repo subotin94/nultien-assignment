@@ -67,7 +67,7 @@ export class LayoutComponent implements SubComponent {
 
   get showSearch(): boolean {
     const url = this.router.url;
-    return (url.includes('blog-posts') || url.includes('blog-posts'));
+    return (url.includes('blog-posts') || url.includes('comments'));
   }
 
   get sidebarState(): SidebarState {

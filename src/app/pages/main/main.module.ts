@@ -7,6 +7,7 @@ import { LayoutModule } from '../../components/layout/layout.module';
 import { BlogPostProviderModule } from '../../services/blog-post/blog-post.provider.module';
 import { BlogPostsModule } from './blog-posts/blog-posts.module';
 import { CategoryProviderModule } from '../../services/category/category.provider.module';
+import { CommentsModule } from './comments/comments.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CategoryProviderModule } from '../../services/category/category.provide
     CommonModule,
     MainRoutingModule,
     BlogPostsModule,
+    CommentsModule,
     LayoutModule,
     CategoryProviderModule.forRoot(),
     BlogPostProviderModule.forRoot()

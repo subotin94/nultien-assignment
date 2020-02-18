@@ -13,7 +13,7 @@ export class CategoryService extends MainService {
     return super.post(this.apiUrl, category);
   }
 
-  findAll(search?: string): Observable<Response<Category>> {
+  findAll(): Observable<Response<Category>> {
     return super.get(this.apiUrl);
   }
 

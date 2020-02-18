@@ -32,4 +32,8 @@ export class BlogPostService extends MainService {
     return super.put(`${this.apiUrl}/${blogPost.id}`, blogPost);
   }
 
+  deleteBlogPost(id: number) {
+    return super.delete(`${this.apiUrl}/${id}`);
+  }
+
 }

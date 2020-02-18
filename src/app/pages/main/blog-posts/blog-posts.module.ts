@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NbButtonModule, NbWindowModule, NbInputModule, NbSpinnerModule, NbCardModule, NbSearchModule, NbAlertModule } from '@nebular/theme';
+import { NbButtonModule, NbWindowModule, NbInputModule, NbSpinnerModule, NbCardModule, NbAlertModule } from '@nebular/theme';
 import { BlogPostsComponent } from './blog-posts.component';
 import { BlogPostCardModule } from '../../../components/blog-post-card/blog-post-card.module';
 import { CategoryProviderModule } from '../../../services/category/category.provider.module';
@@ -20,10 +20,9 @@ import { CategoryProviderModule } from '../../../services/category/category.prov
     NbInputModule,
     NbSpinnerModule,
     RouterModule,
-    NbSearchModule,
     NbAlertModule,
     CategoryProviderModule.forChild(),
-    NbWindowModule.forRoot()
+    NbWindowModule.forChild()
   ],
   exports: [
     BlogPostsComponent

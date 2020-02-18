@@ -11,7 +11,7 @@
   </nb-card-body>
 </nb-card>
 
-<div #scrollable class="blog-posts-body" [class.padding-right]="hasScroll">
+<div class="blog-posts-body">
   <ng-container>
     <div class="spinner-container"
       *ngIf="loadingBlogs"
@@ -19,7 +19,11 @@
       nbSpinnerStatus="info"
       nbSpinnerSize="giant">
     </div>
-    <blog-post-card *ngFor="let blogPost of blogPosts" (edit)="openBlogWindow(blogPost)" [blogPost]="blogPost">
+    <blog-post-card
+      *ngFor="let blogPost of blogPosts"
+      (edit)="openBlogWindow(blogPost)"
+      (delete)="delete(blogPost.id)"
+      [blogPost]="blogPost">
     </blog-post-card>
   </ng-container>
 </div>
